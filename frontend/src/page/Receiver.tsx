@@ -47,7 +47,7 @@ export default function Receiver() {
              </div>
              
 
-             <a href="#" className="hidden sm:flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-4 py-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
+             <a href="https://github.com/drona-gyawali/SDR-9" className="hidden sm:flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-4 py-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
                <Star size={16} className="text-yellow-500 fill-yellow-500" />
                Star
              </a>

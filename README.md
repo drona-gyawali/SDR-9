@@ -26,7 +26,8 @@ sequenceDiagram
 
 ##  Demo Video
 
-> ![P2p File Transfering system](./public/demo.webp)
+> https://github.com/user-attachments/assets/3ec9cbf1-c4ae-4a61-aed0-545f4fbbe6a4
+
 
 
 ---
