@@ -146,40 +146,42 @@ export default function FileUploader({ peer }: { peer: any }) {
   const canAddMoreFiles = fileQueue.length < MAX_QUEUE_SIZE;
 
   return (
-    <div className="p-6 space-y-8 bg-transparent transition-colors duration-300">
-      {/* Professional Upload Zone */}
+    <div className="p-6 space-y-8 bg-transparent">
+      {/* Premium Upload Zone */}
       <div
         onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
         onDragLeave={() => setIsDragging(false)}
         onDrop={(e) => { e.preventDefault(); setIsDragging(false); handleFiles(e.dataTransfer.files); }}
         onClick={() => canAddMoreFiles && document.getElementById('file-upload-input')?.click()}
-        className={`relative group cursor-pointer border-2 border-dashed rounded-[2rem] transition-all duration-300 p-12 text-center
+        className={`relative group cursor-pointer border-2 border-dashed rounded-[2.5rem] transition-all duration-500 p-12 text-center
           ${isDragging 
-            ? 'bg-indigo-50 dark:bg-indigo-500/10 border-indigo-500 shadow-2xl shadow-indigo-500/10' 
-            : 'bg-slate-50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-800 hover:border-indigo-400 dark:hover:border-indigo-500/50 hover:bg-slate-100/50 dark:hover:bg-slate-800/60'}`}
+            ? 'bg-indigo-500/5 border-indigo-500 shadow-[0_0_40px_rgba(99,102,241,0.1)]' 
+            : 'bg-zinc-50 dark:bg-zinc-950/40 border-zinc-200 dark:border-zinc-800 hover:border-indigo-500/50 hover:bg-zinc-100/50 dark:hover:bg-zinc-900/50'}`}
       >
         <input type="file" multiple onChange={(e) => { handleFiles(e.target.files); e.target.value = ''; }} id="file-upload-input" className="hidden" />
         
         <div className="flex flex-col items-center">
-          <div className={`mb-6 p-5 rounded-[1.5rem] transition-all duration-500 transform group-hover:scale-110 group-hover:rotate-3 ${
+          <div className={`mb-6 p-6 rounded-[2rem] transition-all duration-700 transform group-hover:scale-105 group-hover:-translate-y-1 ${
             isDragging 
             ? 'bg-indigo-600 text-white' 
-            : 'bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-xl border border-slate-100 dark:border-slate-700'
+            : 'bg-white dark:bg-zinc-900 text-indigo-500 dark:text-indigo-400 shadow-2xl dark:shadow-none border border-zinc-100 dark:border-zinc-800'
           }`}>
-            <UploadCloud size={40} />
+            <UploadCloud size={44} strokeWidth={1.5} />
           </div>
-          <h4 className="text-xl font-bold text-slate-800 dark:text-white">Upload Assets</h4>
-          <p className="text-slate-500 dark:text-slate-400 text-sm mt-2 max-w-xs mx-auto">
-            Drag and drop your files here or <span className="text-indigo-600 dark:text-indigo-400 font-semibold underline underline-offset-4">browse files</span>.
+          <h4 className="text-xl font-bold text-zinc-800 dark:text-zinc-100 tracking-tight">Drop your files here</h4>
+          <p className="text-zinc-500 dark:text-zinc-500 text-sm mt-2 max-w-xs mx-auto">
+            Drag and drop or <span className="text-indigo-500 font-semibold hover:underline">browse</span>
           </p>
-          <p className="text-[10px] uppercase tracking-widest text-slate-400 mt-6 font-bold">
-            Queue: {fileQueue.length} / {MAX_QUEUE_SIZE} 
-          </p>
+          <div className="mt-6 flex items-center gap-2 px-3 py-1 bg-zinc-200/50 dark:bg-zinc-800/50 rounded-full">
+            <span className="text-[10px] uppercase tracking-tighter text-zinc-500 dark:text-zinc-400 font-bold">
+              Queue: {fileQueue.length} / {MAX_QUEUE_SIZE} 
+            </span>
+          </div>
         </div>
       </div>
 
       {uploadError && (
-        <div className="flex items-center gap-3 p-4 bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 rounded-2xl text-xs font-bold border border-red-100 dark:border-red-500/20 animate-in fade-in zoom-in-95">
+        <div className="flex items-center gap-3 p-4 bg-red-500/10 text-red-500 rounded-2xl text-xs font-bold border border-red-500/20 animate-in fade-in slide-in-from-top-2">
           <AlertTriangle size={18} /> {uploadError}
         </div>
       )}
@@ -189,46 +191,46 @@ export default function FileUploader({ peer }: { peer: any }) {
         <div className="animate-in slide-in-from-bottom-4 duration-700">
           <div className="flex items-center justify-between mb-6 px-2">
             <div>
-              <h3 className="font-bold text-slate-800 dark:text-white flex items-center gap-2 text-lg">
-                Transfer Queue
+              <h3 className="font-bold text-zinc-800 dark:text-zinc-100 flex items-center gap-2 text-lg tracking-tight">
+                Queue
               </h3>
-              <p className="text-xs text-slate-400 font-medium">{fileQueue.length} items ready for encryption</p>
+              <p className="text-xs text-zinc-500 font-medium">Ready for P2P delivery</p>
             </div>
             
             <button
               onClick={() => !isAnyTransferring && filesPending && startFileTransfer(fileQueue.find(f => f.status === 'pending')!)}
               disabled={isAnyTransferring || !filesPending}
-              className="group flex items-center gap-2 px-6 py-3 bg-indigo-600 dark:bg-indigo-500 text-white rounded-2xl text-sm font-bold shadow-xl shadow-indigo-200 dark:shadow-none hover:bg-indigo-700 dark:hover:bg-indigo-600 disabled:opacity-50 disabled:shadow-none transition-all active:scale-95"
+              className="group cursor-pointer relative flex items-center gap-2 px-6 py-3 bg-indigo-600 dark:bg-indigo-500 text-white rounded-2xl text-sm cursor-pointer font-bold shadow-lg shadow-indigo-500/20 hover:bg-indigo-500 hover:shadow-indigo-500/40 disabled:opacity-50 disabled:grayscale transition-all active:scale-95"
             >
-              {isAnyTransferring ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />}
-              {isAnyTransferring ? 'Syncing...' : 'Initiate Sync'}
+              {isAnyTransferring ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />}
+              {isAnyTransferring ? 'Syncing...' : 'Start Transfer'}
             </button>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-3">
             {fileQueue.map((item) => (
               <div 
                 key={item.id} 
-                className="group relative flex items-center justify-between p-5 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl hover:border-indigo-200 dark:hover:border-indigo-500/30 transition-all hover:shadow-xl hover:shadow-slate-200/50 dark:hover:shadow-none"
+                className="group relative flex items-center justify-between p-4 bg-white dark:bg-zinc-900/30 border border-zinc-100 dark:border-zinc-800/60 rounded-3xl hover:border-zinc-300 dark:hover:border-zinc-700 transition-all"
               >
-                <div className="flex items-center gap-5 flex-1">
-                  <div className={`p-3 rounded-2xl transition-colors ${
+                <div className="flex items-center gap-4 flex-1">
+                  <div className={`p-3 rounded-2xl transition-all duration-500 ${
                     item.status === 'complete' 
-                    ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' 
+                    ? 'bg-emerald-500/10 text-emerald-500' 
                     : item.status === 'transferring'
-                    ? 'bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400'
-                    : 'bg-slate-50 dark:bg-slate-800 text-slate-400 dark:text-slate-500'
+                    ? 'bg-indigo-500/10 text-indigo-500'
+                    : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-400 dark:text-zinc-600'
                   }`}>
-                    <FileText size={22} />
+                    <FileText size={22} strokeWidth={1.5} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-bold text-slate-800 dark:text-slate-200 truncate">{item.file.name}</p>
-                    <div className="flex items-center gap-2 text-[11px] font-bold mt-1">
-                      <span className="text-slate-400 dark:text-slate-500 tracking-tight">{formatSize(item.file.size)}</span>
-                      <span className="text-slate-200 dark:text-slate-700">•</span>
-                      <span className={`uppercase tracking-widest ${
+                    <p className="text-sm font-bold text-zinc-800 dark:text-zinc-200 truncate tracking-tight">{item.file.name}</p>
+                    <div className="flex items-center gap-2 text-[11px] font-bold mt-0.5">
+                      <span className="text-zinc-400 dark:text-zinc-500">{formatSize(item.file.size)}</span>
+                      <span className="text-zinc-300 dark:text-zinc-800">•</span>
+                      <span className={`uppercase tracking-tighter ${
                         item.status === 'complete' ? 'text-emerald-500' : 
-                        item.status === 'transferring' ? 'text-indigo-500 animate-pulse' : 'text-slate-400'
+                        item.status === 'transferring' ? 'text-indigo-500' : 'text-zinc-500'
                       }`}>
                         {item.status}
                       </span>
@@ -236,31 +238,31 @@ export default function FileUploader({ peer }: { peer: any }) {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-6">
+                <div className="flex items-center gap-4">
                   {item.status === 'transferring' && (
-                    <div className="flex flex-col items-end gap-2">
-                      <span className="text-[10px] font-black text-indigo-600 dark:text-indigo-400">{Math.round(item.progress)}%</span>
-                      <div className="w-24 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                    <div className="flex flex-col items-end gap-1.5">
+                      <span className="text-[10px] font-black text-indigo-500 tabular-nums">{Math.round(item.progress)}%</span>
+                      <div className="w-20 h-1 bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
                         <div 
-                          className="h-full bg-indigo-600 dark:bg-indigo-500 transition-all duration-500 ease-out" 
+                          className="h-full bg-indigo-500 transition-all duration-300 ease-out" 
                           style={{ width: `${item.progress}%` }} 
                         />
                       </div>
                     </div>
                   )}
                   
-                  {item.status === 'complete' && <CheckCircle size={22} className="text-emerald-500" />}
-                  {item.status === 'pending' && <Clock size={20} className="text-slate-300 dark:text-slate-600" />}
+                  {item.status === 'complete' && <CheckCircle size={20} className="text-emerald-500" strokeWidth={2.5} />}
+                  {item.status === 'pending' && <Clock size={18} className="text-zinc-300 dark:text-zinc-700" />}
                   
                   <button
                     onClick={() => item.status !== 'transferring' && setFileQueue(prev => prev.filter(f => f.id !== item.id))}
-                    className={`p-2 rounded-xl transition-all ${
+                    className={`p-2 rounded-xl transition-all cursor-pointer ${
                       item.status === 'transferring' 
-                      ? 'opacity-20 cursor-not-allowed' 
-                      : 'hover:bg-red-50 dark:hover:bg-red-500/10 text-slate-300 dark:text-slate-600 hover:text-red-500 dark:hover:text-red-400'
+                      ? 'opacity-0 scale-50 pointer-events-none' 
+                      : 'hover:bg-red-500/10 text-zinc-300 dark:text-zinc-700 hover:text-red-500'
                     }`}
                   >
-                    <X size={20} />
+                    <X size={18} />
                   </button>
                 </div>
               </div>

@@ -8,6 +8,14 @@ export default defineConfig({
     tailwindcss(),
   ],
   define: {
-    global: "globalThis"
-  }
+    global: "globalThis",
+  },
+  server: {
+    host: true,
+    port: 5173,
+    strictPort: true,
+    watch: {
+      usePolling: true,
+    },
+  },
 })

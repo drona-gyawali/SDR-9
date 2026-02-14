@@ -10,5 +10,5 @@ html, body, #root {
 
 html.dark {
   color-scheme: dark;
-  background-color: #020617; /* Matches your slate-950 */
+  background-color: #020617;
 }

@@ -61,6 +61,17 @@ Handling files over 1GB without crashing the browser was the primary challenge.
 
 ##  Installation & Setup
 
+**Access the UI**
+
+* Frontend: http://localhost/5173
+
+### Docker Installation(Recommended)
+```bash
+// run command from the root
+docker compose up -d
+
+```
+
 ### 1. Prerequisites
 * Node.js installed
 * Redis server running (for BullMQ)
@@ -79,8 +90,9 @@ npm run dev
 ```bash
 cd backend
 npm run worker
-
 ```
+
+
 
 ### 4. Frontend Setup
 
