@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useSender from "../hooks/useSender";
 import FileUploader from "../components/FileUploader";
-import { Copy, Link, Wifi, Star, Lock, ShieldCheck, Check } from 'lucide-react';
+import { Copy, Link, Wifi, Star, ShieldCheck, Check } from 'lucide-react';
 import { generateHumanCode } from "../utils/file";
 import SendEmail from "../components/SendEmail";
 

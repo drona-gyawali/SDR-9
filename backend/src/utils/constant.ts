@@ -3,19 +3,19 @@ export const SUBJECT = (name: string): string => {
 };
 
 export const TEXT = (name: string, link: string): string => {
-  const text: string = `
-    Hi there,
-    
-    [${name}] wants to send you a file via P2P.
-    
-    Because this is a direct peer-to-peer transfer, you both need to be online at the same time to start the transfer. 
-    
-    Click the link below to join the room and receive your file
-    
-    [${link}]
-    
-    See you online!
-    `;
+  return `
+SecureTransfer: File Ready for Receipt
 
-  return text;
+${name} has initiated a direct peer-to-peer file transfer with you.
+
+IMPORTANT: Because this is a real-time P2P transfer, both parties must remain online for the duration of the process. If the sender closes their browser before you join, the session will expire.
+
+You can join the secure session and begin the download by clicking the link below:
+
+${link}
+
+Note: For security, files are never stored in the cloud. This link is only active while the sender's session is open.
+
+— The SecureTransfer Team
+    `.trim();
 };

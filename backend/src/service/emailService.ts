@@ -11,7 +11,7 @@ export const sendEmail = async (
 ) => {
   try {
     const info = await transporter.sendMail({
-      from: `"No-Reply" ${conf.node_env == 'dev' ? process.env.DEV_MAIL : process.env.PROD_MAIL}`,
+      from: `"SecureTransfer" <no-reply@mail.dorna.com.np>`,
       to: receiverMail,
       subject: SUBJECT(SenderName),
       text: TEXT(SenderName, link),

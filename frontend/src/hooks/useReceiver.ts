@@ -53,7 +53,7 @@ export default function useReceiver(roomId: string | null) {
           console.log("Could not decode as text, treating as binary data");
         }
         
-        handleBinaryData(data.buffer || data);
+        handleBinaryData((data.buffer || data) as ArrayBuffer);
         return;
       }
       
