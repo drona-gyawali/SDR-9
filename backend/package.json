@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/config/server.ts",
+    "dev": "nodemon src/config/server.ts & nodemon src/config/process.ts & wait",
     "start": "node dist/config/server.js",
     "lint:fix": "npx eslint . --fix",
     "lint:write": "npx prettier --write .",
@@ -15,7 +15,7 @@
     "p2p",
     "webrtc",
     "file-transfer",
-    "real-time"
+    "real-time-connections"
   ],
   "author": "Dorna Raj Gyawali <dronarajgyawali@gmail.com>",
   "license": "ISC",

@@ -2,6 +2,7 @@ import { Server } from 'socket.io';
 import http from 'http';
 import { randomUUID } from 'crypto';
 import { conf, origin } from '../config/conf';
+import { Socket } from 'socket.io';
 
 interface RoomData {
   peers: Set<string>;
@@ -25,11 +26,14 @@ class SocketManager {
     });
   }
 
-  private registerHandlers(socket: any) {
+  private registerHandlers(socket: Socket) {
     socket.on('disconnect', (reason: any) => {
       console.log(`User disconnected: ${socket.id} reason: ${reason}`);
       this.rooms.forEach((room, roomId) => {
         if (room.peers.has(socket.id)) room.peers.delete(socket.id);
+        if (room.peers.size === 0) {
+          this.rooms.delete(roomId);
+        }
       });
     });
 
@@ -47,7 +51,15 @@ class SocketManager {
     });
 
     socket.on('join-room', (roomId: string) => {
+      if (!roomId || typeof roomId !== 'string') {
+        socket.emit('error', 'Invalid roomId');
+      }
+
+      if (roomId.length > 100) {
+        socket.emit('error', 'Room Id too long');
+      }
       if (!this.rooms.has(roomId)) {
+        socket.emit('error', 'Room Not Found');
         console.log(`Room not found: ${roomId}`);
         return;
       }
@@ -66,6 +78,8 @@ class SocketManager {
     });
 
     socket.on('signal', ({ roomId, data }: { roomId: string; data: any }) => {
+      if (!roomId || typeof roomId != 'string') return;
+      if (!data) return;
       const room = this.rooms.get(roomId);
       if (!room) return;
 

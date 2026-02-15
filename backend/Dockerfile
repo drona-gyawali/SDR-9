@@ -5,4 +5,4 @@ RUN npm install
 COPY . .
 RUN npx tsc
 EXPOSE 8000
-CMD node dist/config/server.js & node dist/config/process.js
+CMD ["sh", "-c", "node dist/config/server.js & node dist/config/process.js & wait"]
