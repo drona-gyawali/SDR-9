@@ -29,7 +29,7 @@ const SendEmail: React.FC<{ link: string }> = ({ link }) => {
   };
 
   return (
-    <div className="bg-white dark:bg-zinc-900/50 rounded-[2rem] p-6 shadow-sm border border-zinc-200 dark:border-zinc-800/50 backdrop-blur-sm transition-colors duration-300">
+    <div className="bg-white dark:bg-zinc-900/50 rounded-4xl p-6 shadow-sm border border-zinc-200 dark:border-zinc-800/50 backdrop-blur-sm transition-colors duration-300">
       {/* Header Section */}
       <div className="flex items-center gap-3 mb-6">
         <div className="bg-zinc-100 dark:bg-zinc-800/50 p-2.5 rounded-xl text-zinc-600 dark:text-zinc-400 border border-transparent dark:border-zinc-700/30">
@@ -68,7 +68,7 @@ const SendEmail: React.FC<{ link: string }> = ({ link }) => {
         <button
           type="submit"
           disabled={status === 'loading'}
-          className={`w-full group flex items-center justify-center gap-2 py-3.5 rounded-xl font-bold text-sm transition-all active:scale-[0.98] disabled:opacity-70 shadow-lg ${
+          className={`w-full group cursor-pointer flex items-center justify-center gap-2 py-3.5 rounded-xl font-bold text-sm transition-all active:scale-[0.98] disabled:opacity-70 shadow-lg ${
             status === 'success' 
               ? 'bg-emerald-500 text-white shadow-emerald-500/20' 
               : 'bg-zinc-900 dark:bg-indigo-600 text-white shadow-zinc-900/20 dark:shadow-indigo-500/20 hover:bg-zinc-800 dark:hover:bg-indigo-500'
