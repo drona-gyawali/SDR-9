@@ -161,9 +161,9 @@ export default function FileUploader({ peer }: { peer: any }) {
         <input type="file" multiple onChange={(e) => { handleFiles(e.target.files); e.target.value = ''; }} id="file-upload-input" className="hidden" />
 
         <div className="flex flex-col items-center">
-          <div className={`mb-4 sm:mb-6 p-4 sm:p-6 rounded-3xl sm:rounded-4xl transition-all duration-700 transform group-hover:scale-105 group-hover:-translate-y-1 ${isDragging
-              ? 'bg-indigo-600 text-white'
-              : 'bg-white dark:bg-zinc-900 text-indigo-500 dark:text-indigo-400 shadow-xl dark:shadow-none border border-zinc-100 dark:border-zinc-800'
+          <div className={`mb-4  sm:mb-6 p-4 sm:p-6 rounded-3xl sm:rounded-4xl transition-all duration-700 transform group-hover:scale-105 group-hover:-translate-y-1 ${isDragging
+              ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 shadow-md'
+              : 'bg-white dark:bg-zinc-950 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors'
             }`}>
             <UploadCloud className="w-8 h-8 sm:w-11 sm:h-11" strokeWidth={1.5} />
           </div>
@@ -201,7 +201,7 @@ export default function FileUploader({ peer }: { peer: any }) {
             <button
               onClick={() => !isAnyTransferring && filesPending && startFileTransfer(fileQueue.find(f => f.status === 'pending')!)}
               disabled={isAnyTransferring || !filesPending}
-              className="w-full cursor-pointer  sm:w-auto group flex items-center justify-center gap-2 px-6 py-4 sm:py-3  bg-indigo-600 dark:hover:bg-indigo-500 text-white rounded-2xl text-sm font-bold shadow-lg shadow-indigo-500/20 hover:bg-indigo-500 active:scale-[0.98] transition-all disabled:opacity-50"
+              className="w-full cursor-pointer sm:w-auto group flex items-center justify-center gap-2 px-6 py-4 sm:py-3 bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 rounded-2xl text-sm font-bold shadow-lg shadow-zinc-950/10 dark:shadow-white/10 hover:bg-zinc-800 dark:hover:bg-zinc-200 active:scale-[0.98] transition-all disabled:opacity-50 border border-transparent dark:border-zinc-200"
             >
               {isAnyTransferring ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} className="group-hover:translate-y-1 transition-transform" />}
               {isAnyTransferring ? 'Syncing...' : "Start Transfer"}

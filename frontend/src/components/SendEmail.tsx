@@ -71,7 +71,7 @@ const SendEmail: React.FC<{ link: string }> = ({ link }) => {
           className={`w-full group cursor-pointer flex items-center justify-center gap-2 py-3.5 rounded-xl font-bold text-sm transition-all active:scale-[0.98] disabled:opacity-70 shadow-lg ${
             status === 'success' 
               ? 'bg-emerald-500 text-white shadow-emerald-500/20' 
-              : 'bg-zinc-900 dark:bg-indigo-600 text-white shadow-zinc-900/20 dark:shadow-indigo-500/20 hover:bg-zinc-800 dark:hover:bg-indigo-500'
+              : 'bg-zinc-900 text-white hover:bg-zinc-800 shadow-zinc-900/20 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200 dark:shadow-white/10'
           }`}
         >
           {status === 'loading' ? (

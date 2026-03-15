@@ -44,7 +44,7 @@ export default function Receiver() {
                         {completedFiles.length > 1 && (
                             <button 
                                 onClick={handleDownloadAll}
-                                className="text-xs font-bold text-indigo-500 hover:text-indigo-600 transition-colors"
+                                className="text-xs font-bold cursor-pointer text-indigo-500 hover:text-indigo-600 transition-colors"
                             >
                                 Download All
                             </button>
@@ -79,16 +79,16 @@ export default function Receiver() {
                             <button
                                 onClick={handleDownloadAll}
                                 disabled={completedFiles.length === 0}
-                                className={`w-full py-4 rounded-2xl flex items-center justify-center gap-3 font-black text-sm uppercase tracking-widest transition-all active:scale-[0.98] ${
+                                className={`w-full py-4 rounded-2xl flex items-center justify-center gap-3 font-black text-sm uppercase tracking-widest transition-all active:scale-[0.98] cursor-pointer${
                                     completedFiles.length > 0 
-                                    ? 'bg-indigo-600 text-white shadow-xl shadow-indigo-500/20' 
-                                    : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-400 cursor-not-allowed'
+                                    ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 shadow-lg shadow-zinc-950/10 dark:shadow-white/10 cursor-pointer dark:hover:bg-zinc-200' 
+                                    : 'bg-zinc-100 dark:bg-zinc-900 text-zinc-400 dark:text-zinc-600 cursor-not-allowed opacity-50'
                                 }`}
                             >
                                 {isReceiving ? (
                                     <><Loader2 size={20} className="animate-spin" /> Receiving Files...</>
                                 ) : completedFiles.length > 0 ? (
-                                    <><Download size={20} /> Save {completedFiles.length} {completedFiles.length === 1 ? 'File' : 'Files'}</>
+                                    <><Download  size={20} /> Save {completedFiles.length} {completedFiles.length === 1 ? 'File' : 'Files'}</>
                                 ) : (
                                     <><Package size={20} /> Waiting for files</>
                                 )}
