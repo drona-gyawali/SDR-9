@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
-import nodemailer from 'nodemailer';
 import type { CorsOptions } from 'cors';
+import { Resend } from 'resend';
 
 dotenv.config();
 
@@ -14,16 +14,6 @@ export const conf: envConfig = {
   node_env: String(process.env.NODE_ENV),
 };
 
-const mailConfigOptions = {
-  host: conf.node_env == 'dev' ? process.env.DEV_HOST : process.env.PROD_HOST,
-  port: 587,
-  secure: false,
-  auth: {
-    user: conf.node_env == 'dev' ? process.env.DEV_MAIL : process.env.PROD_MAIL,
-    pass: conf.node_env == 'dev' ? process.env.DEV_PASS : process.env.PROD_PASS,
-  },
-};
-
 export const origin = process.env.origin;
 export const REDIS_URL: string | undefined = process.env.REDIS_URL;
 
@@ -33,4 +23,4 @@ export const corsOption: CorsOptions = {
   allowedHeaders: ['Content-Type'],
 };
 
-export const transporter = nodemailer.createTransport(mailConfigOptions);
+export const resend = new Resend(process.env.RESEND_API);

@@ -1,6 +1,4 @@
-import { transporter } from '../config/conf';
-import { conf } from '../config/conf';
-import nodemailer from 'nodemailer';
+import { resend } from '../config/conf';
 import { SUBJECT, TEXT } from '../utils/constant';
 import { HTML } from '../template/email';
 
@@ -10,16 +8,20 @@ export const sendEmail = async (
   receiverMail: string
 ) => {
   try {
-    const info = await transporter.sendMail({
+    const { data, error } = await resend.emails.send({
       from: `"SecureTransfer" <no-reply@mail.dorna.com.np>`,
       to: receiverMail,
       subject: SUBJECT(SenderName),
       text: TEXT(SenderName, link),
       html: HTML(SenderName, link),
     });
-    conf.node_env == 'dev'
-      ? console.log(`Test url ethreal: ${nodemailer.getTestMessageUrl(info)}`)
-      : console.log(`Email sent: ${info.response}`);
+
+    if (error) {
+      console.log(`Resend Error: ${error}`);
+      return false;
+    }
+
+    console.log(`Email sent successfully! ID: ${data?.id}`);
     return true;
   } catch (error: unknown) {
     if (error instanceof Error) {
