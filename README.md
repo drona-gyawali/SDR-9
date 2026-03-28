@@ -55,7 +55,7 @@ Handling files over 1GB without crashing the browser was the primary challenge.
 * **Frontend:** React (UI & WebRTC implementation)
 * **Signaling Server:** Node.js (Express & Socket.io)
 * **Email Queue:** BullMQ + Redis (Handles invitation delivery)
-* **UI Design:** Gemini AI
+* **UI Design and implementation is done by Kushal Aryal
 
 ---
 
